@@ -37,16 +37,23 @@ class TaskC {
 		minimum(a);
 		System.out.println(a[minElement]);
 	}
-
+// nujno skorrektirovat' verhnuu granicu summatora - pod konec innogda lishnego summiruet i poetomu ne ostaetsea ostal'nim
 
 	public static void minimum (long[] a) {
-		long minValue = Long.MAX_VALUE;
+		long minValue = a[0];
+		long prevMinValue = a[0];
+		minElement = 0;
+		lastMinElement = 0;
 		for (int i = 0; i < a.length; i++) {
-			if (minValue > a[i]) {
-				minValue = a[i];
-				lastMinElement = minElement;
-				minElement = i;
-			} else if (a[lastMinElement] > a[i]) lastMinElement = i;
+			if (a[i] != minValue) {
+				if (a[i] < minValue) {
+					minValue = a[i];
+					minElement = i;
+				} else if (a[i] < prevMinValue) {
+					prevMinValue = a[i];
+					lastMinElement = i;
+				}
+			}
 		} return;
 	}
 }

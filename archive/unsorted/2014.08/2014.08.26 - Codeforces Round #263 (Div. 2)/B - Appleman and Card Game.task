@@ -1,0 +1,35 @@
+26 B - Appleman and Card Game
+6 SINGLE
+8 STANDARD
+9 input.txt
+8 STANDARD
+10 output.txt
+2
+0
+22 15 10
+DZFDFZDFDDDDDDF
+
+3 82
+
+1
+1
+11 6 4
+YJSNPI
+
+2 4
+
+1
+12 src/angrySCV
+8 -Xmx256M
+4 Main
+14 angrySCV.TaskB
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2014.08.26
+30 Codeforces Round #263 (Div. 2)
+1
+17 java.util.Scanner
+19 java.io.PrintWriter
+0
+0
