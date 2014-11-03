@@ -1,7 +1,7 @@
 codeForces
 ==========
 
-some codeForces contest trying
+some codeForces contest trying. 
 all solutions were placed in "unsorted" catalog
 
 =======
