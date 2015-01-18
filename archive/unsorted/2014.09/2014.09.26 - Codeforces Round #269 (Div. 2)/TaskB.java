@@ -1,5 +1,7 @@
 package angrySCV;
 
+
+
 import java.util.Scanner;
 import java.io.PrintWriter;
 
@@ -7,6 +9,7 @@ class TaskB {
 	private static int dlinnaPervogoChisla;
 	private static int dlinnaVtorogoChisla;
 	private static 	int massiveStartFrom = 0 ;
+	private static	int[] resultat;
 
 	public void solve (int testNumber, Scanner in, PrintWriter out) {
 		String chislo1 = in.next();
@@ -14,13 +17,12 @@ class TaskB {
 		dlinnaPervogoChisla = chislo1.length();
 		dlinnaVtorogoChisla = chislo2.length();
 		String xLevo, xPravo, yLevo, yPravo;
-		int[] resultat;
 		int[] massivChisel1;
 		int[] massivChisel2;
 		massivChisel1 = new int[dlinnaPervogoChisla];
 		massivChisel2 = new int[dlinnaVtorogoChisla];
-		resultat = new int[dlinnaPervogoChisla + dlinnaVtorogoChisla];
-		resultat[dlinnaPervogoChisla + dlinnaVtorogoChisla - 1] = 0;
+		resultat = new int[dlinnaPervogoChisla + dlinnaVtorogoChisla+1];
+//		resultat[dlinnaPervogoChisla + dlinnaVtorogoChisla] = -1;
 		rasparsitChisla(chislo1, chislo2, massivChisel1, massivChisel2);
 		peremnojit(massivChisel1, massivChisel2, resultat);
 		vivestiResultat(resultat);
@@ -41,35 +43,45 @@ class TaskB {
 	}
 
 	private void vivestiResultat (int[] resultat) {
-		for (int i = massiveStartFrom; i <dlinnaPervogoChisla+dlinnaPervogoChisla-1; i++) {
+		if (resultat[0]==0)massiveStartFrom = 1;
+		for (int i = massiveStartFrom; i <dlinnaPervogoChisla+dlinnaPervogoChisla; i++) {
 			System.out.print(resultat[i]);
 		}
 	}
 
 	private void peremnojit (int[] massivChisel1, int[] massivChisel2, int[] resultat) {
-		int nomerElementaVotvete = -1;
+		int nomerElementaVotvete = 0;
 		for (int i = 0; i < dlinnaVtorogoChisla; i++) {
 			nomerElementaVotvete++;
 			for (int j = 0; j < dlinnaPervogoChisla; j++) {
 				resultat[j + nomerElementaVotvete] = resultat[j + nomerElementaVotvete] + massivChisel1[j] * massivChisel2[i];
+				if (j-1+ nomerElementaVotvete>0) {resultat[j-1+ nomerElementaVotvete]+=resultat[j+ nomerElementaVotvete]/10;
+					resultat[j+ nomerElementaVotvete] = resultat[j+ nomerElementaVotvete] % 10;
+					checkForOverload(j-1+nomerElementaVotvete);
+				}
 
 			}
 
 		}
-		for (int k = dlinnaPervogoChisla+dlinnaVtorogoChisla-1; k > 1; k--) {
-			resultat[k] = resultat[k] + resultat[k - 1] % 10;
-			resultat[k - 1] = resultat[k - 1] / 10;
+//		for (int k = dlinnaPervogoChisla+dlinnaVtorogoChisla-1; k > 1; k--) {
+//			resultat[k] = resultat[k] + resultat[k - 1] % 10;
+//			resultat[k - 1] = resultat[k - 1] / 10;
+//
+//
+//
+//
+//		}
+//		resultat[1]+=resultat[0]%10;
+//		resultat[0]=resultat[0]/10;
+//		if (resultat[0]==0) massiveStartFrom = 1;
+	}
 
-			if (resultat[k]>9){
-				resultat[k-1]+=resultat[k]/10;
-				resultat[k] = resultat[k]%10;
-			}
-
-
+	private void checkForOverload (int nomerElementa) {
+		if (resultat[nomerElementa]>9){
+			resultat[nomerElementa-1]+=resultat[nomerElementa]/10;
+			resultat[nomerElementa] = resultat[nomerElementa]%10;
+			checkForOverload(nomerElementa-1);
 		}
-		resultat[1]+=resultat[0]%10;
-		resultat[0]=resultat[0]/10;
-		if (resultat[0]==0) massiveStartFrom = 1;
 	}
 
 	private void rasparsitChisla (String chislo1, String chislo2, int[] massivChisel1, int[] massivChisel2) {
@@ -84,4 +96,3 @@ class TaskB {
 	}
 
 }
-
