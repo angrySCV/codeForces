@@ -1,6 +1,8 @@
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -22,50 +24,31 @@ public class Main {
 
 class TaskA {
 	public void solve (int testNumber, Scanner in, PrintWriter out) {
-		int incorrect = 0;
-		String correctWord = "";
-		String vvod = in.next();
-		String secondTry = vvod;
-		int dlinnaStroki = vvod.length();
-		if (dlinnaStroki == 1) {
-			System.out.print(vvod + vvod);
-			return;
+		int colichestvoInstrumentov = in.nextInt();
+		int colichestvoDney = in.nextInt();
+		int[][] obuchenie = new int[colichestvoInstrumentov][2];
+		for (int i = 0; i < colichestvoInstrumentov; i++) {
+			obuchenie[i][0] = in.nextInt();
+			obuchenie[i][1] = i;
 		}
-		for (int i = 0; i < dlinnaStroki / 2; i++) {
-			if (vvod.charAt(i) != vvod.charAt(dlinnaStroki - 1 - i)) {
-				incorrect++;
-				correctWord = vvod.substring(0, dlinnaStroki - i) + vvod.charAt(i) + vvod.substring(dlinnaStroki - i);
-				vvod = correctWord;
-				dlinnaStroki++;
+		int countInstrument = 0;
+		int countDay = 0;
+		int totalCount = 0;
+		Arrays.sort(obuchenie, new Comparator<int[]>() {
+			public int compare (int[] o1, int[] o2) {
+				return Integer.compare(o1[0], o2[0]);
 			}
-
+		});
+out:
+		for (int i = 0; i < colichestvoInstrumentov; i++) {
+			if (countDay + obuchenie[i][0] <= colichestvoDney){
+				countDay = countDay+obuchenie[i][0];
+				countInstrument++;
+			} else break out;
 		}
-
-		if (incorrect > 1) {
-			incorrect = 0;
-			dlinnaStroki = secondTry.length();
-			for (int i = 0; i < dlinnaStroki / 2; i++) {
-				if (secondTry.charAt(i) != secondTry.charAt(dlinnaStroki - i-1)) {
-					incorrect++;
-					correctWord = secondTry.substring(0, i) + secondTry.charAt(dlinnaStroki - i-1) + secondTry.substring(i, dlinnaStroki);
-					secondTry = correctWord;
-					dlinnaStroki++;
-				}
-
-			}
-			vvod =secondTry;
-		}
-
-		switch (incorrect) {
-			case 0:
-				correctWord = vvod.substring(0, dlinnaStroki / 2) + vvod.charAt(dlinnaStroki / 2) + vvod.substring(dlinnaStroki / 2);
-				System.out.println(correctWord);
-				break;
-			case 1:
-				System.out.println(vvod);
-				break;
-			default:
-				System.out.println("NA");
+		System.out.println(countInstrument);
+		for (int i = 0; i < countInstrument; i++) {
+			System.out.print(obuchenie[i][1]+1 + " ");
 		}
 	}
 }

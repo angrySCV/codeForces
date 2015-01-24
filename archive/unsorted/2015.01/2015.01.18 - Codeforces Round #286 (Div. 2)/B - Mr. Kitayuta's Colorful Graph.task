@@ -1,0 +1,61 @@
+33 B - Mr. Kitayuta's Colorful Graph
+6 SINGLE
+8 STANDARD
+-1
+8 STANDARD
+-1
+2
+0
+48 4 5
+1 2 1
+1 2 2
+2 3 1
+2 3 3
+2 4 3
+3
+1 2
+3 4
+1 4
+
+6 2
+1
+0
+
+1
+1
+68 5 7
+1 5 1
+2 5 1
+3 5 1
+4 5 1
+1 2 2
+2 3 2
+3 4 2
+5
+1 5
+5 1
+2 5
+1 5
+1 4
+
+10 1
+1
+1
+1
+2
+
+1
+12 src/angrySCV
+8 -Xmx256M
+4 Main
+14 angrySCV.TaskB
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2015.01.18
+30 Codeforces Round #286 (Div. 2)
+1
+17 java.util.Scanner
+19 java.io.PrintWriter
+0
+0
